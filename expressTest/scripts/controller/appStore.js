@@ -22,30 +22,16 @@ app.config(function($stateProvider, $urlRouterProvider){
         })
 })
 app.controller('test',function($scope,$http){
-        var responsePromise = $http.get("/test")
-
-        responsePromise.success(function (data, status, headers, config) {
-            $scope.lists = data;
-        });
-        responsePromise.error(function (data, status, headers, config) {
-            alert("AJAX failed!");
-        });
+       getFunction($scope,$http);
 
     $scope.$on('complete change',function(event,data) {
-        var responsePromise = $http.get("/test")
-
-        responsePromise.success(function (data, status, headers, config) {
-            $scope.lists = data;
-        });
-        responsePromise.error(function (data, status, headers, config) {
-            alert("AJAX failed!");
-        });
+       getFunction($scope,$http,event,data);
     });
      $scope.test1=function(data){
         console.log("/test/"+data)
          var response=$http.get('/test/'+data);
          response.success(function(data, status, headers, config) {
-             $scope.$emit("complete change",{})
+             $scope.$broadcast("complete change",{})
     });
    response.error(function(data, status, headers, config) {
         alert("AJAX2 failed!")
@@ -53,12 +39,13 @@ app.controller('test',function($scope,$http){
 
 
 })
-app.controller('changeStateCtrl',function($scope,$http,$routeParams){
+var getFunction=function($scope,$http,event,data){
+    var responsePromise = $http.get("/test")
 
-   // var response=$http.put('/test'+ $routeParams.id);
-//    response.error(function(data, status, headers, config) {
-//        alert("AJAX failed!");
-//    });
-
-
-})
+    responsePromise.success(function (data, status, headers, config) {
+        $scope.lists = data;
+    });
+    responsePromise.error(function (data, status, headers, config) {
+        alert("AJAX failed!");
+    });
+}
