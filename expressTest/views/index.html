@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="appStore">
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap 3, from LayoutIt!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+	<link href="node_modules/twitter-bootstrap-3.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="node_modules/twitter-bootstrap-3.0.0/css/style.css" rel="stylesheet">
+    <script src="node_modules/angular/angular.js"></script>
+    <!--<script src="../node_modules/angular/angular.min.js"></script>-->
+    <script src="node_modules/angular-ui-router.js"></script>
+    <script src="scripts/controller/appStore.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<div class="page-header">
+				<h1>
+					Task Scheduler
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-pills">
+                <li ui-sref-active="active" ng-class="{active:deleted}" ng-init="deleted=true">
+                    <a ui-sref="home">Home</a>
+                </li>
+				<li ui-sref-active="active">
+					<a ui-sref="todo">Job List</a>
+				</li>
+                <li ui-sref-active="active">
+                    <a ui-sref="completed">Completed</a>
+                </li>
+
+			</ul>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<blockquote>
+				<p>
+					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+				</p> <small>Someone famous <cite>Source Title</cite></small>
+			</blockquote>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-8 column">
+            <div ui-view></div>
+		</div>
+		<div class="col-md-4 column">
+		</div>
+	</div>
+    <div class="row clearfix">
+        <div class="col-md-8 column">
+        </div>
+        <div class="col-md-4 column">
+            <address> <strong>Twitter, Inc.</strong><br> 795 Folsom Ave, Suite 600<br> San Francisco, CA 94107<br> <abbr title="Phone">P:</abbr> (123) 456-7890</address>
+        </div>
+    </div>
+</div>
+</body>
+</html>
