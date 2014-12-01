@@ -15,6 +15,14 @@ router.get('/', function(req, res) {
     //data.todoList.push({'id':3,'task':'cream','completed':false});
     res.send(data.todoList);
 });
+router.post('/post', function(req, res) {
+    data.todoList.push({
+        'id':data.todoList.length+1,
+        'task':req.body.task,
+        'completed':false
+    });
+    res.send("")
+});
 router.get('/:id', function(req, res) {
     //data.todoList.push({'id':3,'task':'cream','completed':false});
     console.log("success"+req.params.id)
@@ -22,9 +30,24 @@ router.get('/:id', function(req, res) {
     for(var i=0;i<data.todoList.length;i++){
         if(data.todoList[i].id==id){
             data.todoList[i].completed=true;
-            console.log("output"+JSON.stringify(data.todoList[i]));
         }
     }
+    res.send("")
+
+
+
+});
+router.put('/delete', function(req, res) {
+    var id=req.body.post;
+    //data.todoList.push({'id':3,'task':'cream','completed':false});
+    console.log("sucess"+id)
+    for(var i=0;i<data.todoList.length;i++){
+        if(data.todoList[i].id==id){
+            console.log(data.todoList[i])
+            data.todoList.splice(i)
+        }
+    }
+    console.log(data.todoList)
     res.send("")
 
 
