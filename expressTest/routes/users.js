@@ -1,4 +1,5 @@
 var express = require('express');
+var stormpath = require('express-stormpath');
 var router = express.Router();
 var data={
     todoList:[
@@ -7,11 +8,14 @@ var data={
         },
         {
             'id':2,'task':'brush','completed':false
+        },
+        {
+            'id':3,'task':'wash','completed':false
         }
     ]
 }
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.get('/',stormpath.loginRequired,function(req, res) {
     //data.todoList.push({'id':3,'task':'cream','completed':false});
     res.send(data.todoList);
 });
