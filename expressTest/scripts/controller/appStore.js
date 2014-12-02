@@ -21,24 +21,47 @@ app.config(function($stateProvider, $urlRouterProvider){
             controller:"changeStateCtrl"
         })
 })
-app.controller('test',function($scope,$http){
-       getFunction($scope,$http);
+app.controller('test',function($scope,$http) {
+    getFunction($scope, $http);
 
-    $scope.$on('complete change',function(event,data) {
-       getFunction($scope,$http,event,data);
-    });
-     $scope.test1=function(data){
-        console.log("/test/"+data)
-         var response=$http.get('/test/'+data);
-         response.success(function(data, status, headers, config) {
-             $scope.$broadcast("complete change",{})
-    });
-   response.error(function(data, status, headers, config) {
-        alert("AJAX2 failed!")
-    })}
+    $scope.test1 = function (data) {
+        console.log("/test/" + data)
 
+        var response = $http.get('/test/' + data);
+        response.success(function (data, status, headers, config) {
+            getFunction($scope, $http);
+        });
+        response.error(function (data, status, headers, config) {
+            alert("AJAX2 failed!")
+        })
+    }
+
+
+    $scope.addTask = function() {
+        console.log($scope.form.task)
+        var response = $http.post('/test/post',$scope.form);
+        response.success(function (data, status, headers, config) {
+            getFunction($scope, $http);
+            $scope.form.task="";
+        });
+        response.error(function (data, status, headers, config) {
+            alert("post failed!")
+        })
+    }
+
+    $scope.delete = function(data) {
+        console.log(data)
+        var response = $http.put('/test/delete',{post:2});
+        response.success(function (data, status, headers, config) {
+            getFunction($scope, $http);
+        });
+        response.error(function (data, status, headers, config) {
+            alert("post failed!")
+        })
+    }
 
 })
+
 var getFunction=function($scope,$http,event,data){
     var responsePromise = $http.get("/test")
 

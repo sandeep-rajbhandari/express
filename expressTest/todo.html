@@ -5,6 +5,22 @@
 
 <body>
 <div class="container" ng-controller="test">
+
+    <div class="row clearfix">
+        <div class="col-md-2 column">
+            <button type="button" class="btn btn-success btn-sm" ng-click="test1(list.id)">DONE</button>
+        </div>
+
+        <div class="col-md-4 column">
+            <input type="text" ng-model="form.task">
+        </div>
+        <div class="col-md-2 column">
+            <button type="button" class="btn btn-sm btn-primary" ng-click="addTask()">ADD</button>
+        </div>
+        <div class="col-md-4 column">
+        </div>
+    </div>
+
     <div ng-repeat="list in lists|filter:false">
         <div class="row clearfix">
             <div class="col-md-2 column">
@@ -15,7 +31,7 @@
                 {{list.task}}
             </div>
             <div class="col-md-2 column">
-                <button type="button" class="btn btn-sm btn-primary">Default</button>
+                <button type="button" class="btn btn-sm btn-primary" ng-click="delete(list.id)">delete</button>
             </div>
             <div class="col-md-4 column">
             </div>
