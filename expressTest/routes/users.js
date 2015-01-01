@@ -54,4 +54,13 @@ router.put('/delete', function(req, res) {
 
 });
 
+router.post('/post/:id', function(req, res) {
+    console.log(">>>>>>>>>"+req.params.id+"::"+req.body.task);
+    data.todoList.push({
+        'id':req.params.id,
+        'task':req.body.task,
+        'completed':false
+    });
+    res.send("")
+});
 module.exports = router;

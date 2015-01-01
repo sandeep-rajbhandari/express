@@ -1,7 +1,7 @@
 /**
  * Created by sandeep on 11/29/2014.
  */
-var app=angular.module('appStore',['ui.router']);
+var app=angular.module('appStore',['ui.router','ngResource']);
 app.config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider.otherwise("index.html");
     $stateProvider
@@ -21,7 +21,7 @@ app.config(function($stateProvider, $urlRouterProvider){
             controller:"changeStateCtrl"
         })
 })
-app.controller('test',function($scope,$http) {
+app.controller('test',function($scope,$http,resourceTest) {
     getFunction($scope, $http);
 
     $scope.test1 = function (data) {
@@ -38,15 +38,17 @@ app.controller('test',function($scope,$http) {
 
 
     $scope.addTask = function() {
-        console.log($scope.form.task)
-        var response = $http.post('/test/post',$scope.form);
-        response.success(function (data, status, headers, config) {
-            getFunction($scope, $http);
-            $scope.form.task="";
-        });
-        response.error(function (data, status, headers, config) {
-            alert("post failed!")
-        })
+        console.log(">>>>>>>>>"+$scope.form.task)
+        resourceTest.create({id:2,task:$scope.form.task})
+        //var response = $http.post('/test/post',$scope.form);
+        //response.success(function (data, status, headers, config) {
+        //    getFunction($scope, $http);
+        //    $scope.form.task="";
+        //});
+        //response.error(function (data, status, headers, config) {
+        //    alert("post failed!")
+        //})
+
     }
 
     $scope.delete = function(data) {
@@ -72,3 +74,13 @@ var getFunction=function($scope,$http,event,data){
         alert("AJAX failed!");
     });
 }
+app.factory('resourceTest',function($resource){
+    var options={
+        create:{
+            method:'POST'
+            //params:{task:'@task'} if we want to pass parameter as /test/post/1?task=""
+        }
+    }
+    return $resource('/test/post/:id', {id: '@id'}, options);
+
+})
